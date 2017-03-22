@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:layout_marginBottom="10dp"
+    android:elevation="6dp"
+    app:cardCornerRadius="2dp"
+    app:cardBackgroundColor="#424242"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/ui_layout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/ui_menu_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FAEBD7"
+                android:textSize="17sp"
+                android:maxLines="3"
+                android:textAlignment="center"
+                android:text="Connect to the arduino via bluetooth and check the status of the payload. Data extraction can also be completed here."
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/ui_menu_title"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:text="Payload Connections"
+                android:textAlignment="center"
+                android:textColor="#FAEBD7"
+                android:textSize="20sp"
+                android:layout_above="@+id/ui_menu_description"
+                android:layout_alignStart="@+id/ui_menu_description" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/ui_layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/ui_menu_background_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/background"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+
+            android:id="@+id/ui_menu_icon"
+            android:layout_width="100dp"
+            android:layout_height="128dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="135dp"
+            android:layout_marginTop="104dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ble" />
+
+
+    </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+
+
+
