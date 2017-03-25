@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.egczb.highaltitudeflightcontroller.Bluetooth.BluetoothActivity;
+import com.example.egczb.highaltitudeflightcontroller.Bluetooth.BluetoothScanActivity;
 import com.example.egczb.highaltitudeflightcontroller.Documentation.DocumentationActivity;
 import com.example.egczb.highaltitudeflightcontroller.FlightAnalytics.FlightAnalyticsActivity;
 import com.example.egczb.highaltitudeflightcontroller.R;
@@ -59,7 +59,7 @@ public class UiAdapter extends RecyclerView.Adapter<UiAdapter.UiViewHolder>{
                     switch (getAdapterPosition()){
                         case 0:
                             Toast.makeText(context, "Opening Payload Connection Center", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, BluetoothActivity.class);
+                            Intent intent = new Intent(context, BluetoothScanActivity.class);
                             context.startActivity(intent);
                             break;
                         case 1:

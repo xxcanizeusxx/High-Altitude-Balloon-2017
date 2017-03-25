@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Bluetooth.BluetoothActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Bluetooth.BluetoothScanActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".Documentation.DocumentationActivity" />
         <activity android:name=".FlightAnalytics.FlightAnalyticsActivity" />
         <activity android:name=".SD.SDActivity" />
