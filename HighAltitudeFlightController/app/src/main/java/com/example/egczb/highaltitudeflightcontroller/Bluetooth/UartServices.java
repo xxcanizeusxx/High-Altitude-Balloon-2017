@@ -23,14 +23,16 @@ import java.util.UUID;
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 /**
- * Created by EGCZB on 3/24/2017.
+ * Created by EGCZB on 3/24/2017. This is the Service class based
+ * on the BTLEDataLogger app. It follows the same example in an
+ * attempt to use the bluetooth services to obtain a connection.
  */
 
 public class UartServices extends Service {
     //The tag for the log
     private final static String LOG_TAG = UartServices.class.getSimpleName();
     //The binder which will bind to clients UUID assigned to class
-    private final IBinder binder = new LocalBinder();
+    private final IBinder binder = new AvailableBinder();
 
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter bluetoothAdapter;
@@ -69,7 +71,7 @@ public class UartServices extends Service {
     public static final UUID RX_CHAR_UUID = UUID.fromString("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
     public static final UUID TX_CHAR_UUID = UUID.fromString("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
 
-    //Constructor
+    //Default empty constructor
     public UartServices(){
 
     }
@@ -161,7 +163,7 @@ public class UartServices extends Service {
         bluetoothGatt = null;
     }
 
-    private class LocalBinder extends Binder {
+    private class AvailableBinder extends Binder {
         UartServices getService(){
             return  UartServices.this;
         }
@@ -184,64 +186,67 @@ public class UartServices extends Service {
     }
 
 
-    //The BluetoothGattCallback where logic takes place
+    //The BluetoothGattCallback
     private final BluetoothGattCallback bluetoothGattCallback = new BluetoothGattCallback() {
-
-        //System method call to accommodate for new changed connection states
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-            //If the incoming state is connected change to connected and broadcast
+            //If the state is connected then broadcast the update
             if(newState == BluetoothProfile.STATE_CONNECTED) {
                 connectionStatus = ConnectionStatus.CONNECTED;
                 broadcastUpdate(ACTION_GATT_CONNECTED);
 
-                // start service discovery
+                //Start service discovery
                 bluetoothGatt.discoverServices();
             }
-            //If it is disconnected do the same but with disconnected status
+            //If not, then the state is Disconnected.
             else if(newState == BluetoothProfile.STATE_DISCONNECTED) {
                 connectionStatus = ConnectionStatus.DISCONNECTED;
                 broadcastUpdate(ACTION_GATT_DISCONNECTED);
             }
         }
 
-        //System method call to find out what to do when device discovered
+        //When the service is discovered
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-            //If the gatt connection was successfull indicate it has discovered a device
+            //If we discovered a service, broadcast the update
             if(status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
             }
-            //Send the log that there was an error
+            //Else, there was a problem discovering services
             else {
                 Log.w(LOG_TAG, "Services discovered a failure: " + status);
             }
         }
-        //Method to read incoming characteristics
+
+        //When we read incoming characteristics
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            //If we have data broadcast the update
             if(status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
         }
-        //Method to check for new characteristic changes
+
+        //When we detect incoming characteristics
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            //Broadcast the update
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
     };
-    //Check iif we can enable Rread notifications
+
+    //Method to enable RX notifications
     public void enableRXNotifications() {
         if(bluetoothGatt == null) {
-            Log.e(LOG_TAG, "Can't enable RX notifications - btGatt is null!");
+            Log.e(LOG_TAG, "Can't enable RX notifications - Bluetooth Gatt is null!");
         }
 
         BluetoothGattService rxService = bluetoothGatt.getService(RX_SERVICE_UUID);
         if(rxService == null) {
-            Log.e(LOG_TAG, "Device doesn't have an RX service!");
+            Log.e(LOG_TAG, "Device doesn't have RX service!");
             return;
         }
-        //Check for transmit characteristic
+
         BluetoothGattCharacteristic txChar = rxService.getCharacteristic(TX_CHAR_UUID);
         if(txChar == null) {
             Log.e(LOG_TAG, "Device doesn't have a TX characteristic!");
@@ -249,6 +254,7 @@ public class UartServices extends Service {
         }
 
         bluetoothGatt.setCharacteristicNotification(txChar, true);
+
         BluetoothGattDescriptor descriptor = txChar.getDescriptor(CCCD);
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
         bluetoothGatt.writeDescriptor(descriptor);

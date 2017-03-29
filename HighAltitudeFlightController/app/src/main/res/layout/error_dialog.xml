@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false">
+
+    <RelativeLayout
+        android:id="@+id/dialog_top_layout"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content">
+
+
+
+        <ImageView
+            android:id="@+id/dialog_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:src="@drawable/balloonicon"
+            android:scaleType="fitCenter"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="-30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:id="@+id/textView"
+            android:textColor="@color/pearWhite"
+            android:textSize="20sp"
+            android:layout_marginStart="-30dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/dialog_icon" />
+
+    </RelativeLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/dialog_bottom_layout"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error Detected!"
+            android:textSize="16sp"
+            android:textColor="@color/pearWhite"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/alert_description"
+            android:paddingTop="13dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This device does not support Bluetooth Low Energy Connectivity!"
+            android:layout_below="@+id/alert_title"
+            android:textColor="@color/pearWhite"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/alert_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/alert_description"
+            android:text="Ok"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+</LinearLayout>
+
+

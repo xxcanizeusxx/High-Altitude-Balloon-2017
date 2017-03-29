@@ -51,7 +51,7 @@ public class UiAdapter extends RecyclerView.Adapter<UiAdapter.UiViewHolder>{
             uiBackgImg = (ImageView)view.findViewById(R.id.ui_menu_background_image);
             uiMenuIcon = (ImageView) view.findViewById(R.id.ui_menu_icon);
 
-            //Set the onClick to listen to the view clicks
+            //Set the onClick to listen to the view clicks and initiate our activities
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
@@ -95,7 +95,7 @@ public class UiAdapter extends RecyclerView.Adapter<UiAdapter.UiViewHolder>{
         this.uiModelList = uiModelList;
     }
 
-    //System call. This call is made when the UiViewHolder is first created
+    //System override method call. This call is made when the UiViewHolder is first created
     //This will attach the layout (ui_card_template) to our ViewHolder
     @Override
     public  UiViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -119,7 +119,6 @@ public class UiAdapter extends RecyclerView.Adapter<UiAdapter.UiViewHolder>{
         //Load the menu background image and icons with Glide
         Glide.with(context).load(model.getUiMenuBackImg()).into(uiHolder.uiBackgImg);
         Glide.with(context).load(model.getUiMenuIcon()).into(uiHolder.uiMenuIcon);
-
 
     }
 

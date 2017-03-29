@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/colorAccent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ble_icon_listview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bleicon" />
+
+        <TextView
+            android:id="@+id/txt_device_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="UART"
+            android:textColor="@color/pearWhite"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txt_device_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0-56b-322-221-233-1"
+            android:textColor="@color/pearWhite"
+            android:textSize="15sp"
+            android:layout_toRightOf="@+id/txt_address_label"
+            android:layout_below="@+id/txt_device_title"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/txt_device_rssi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-61"
+            android:textColor="@color/pearWhite"
+            android:textSize="15sp"
+            android:layout_below="@+id/txt_device_description"
+            android:layout_alignStart="@+id/txt_device_description" />
+
+        <TextView
+            android:id="@+id/txt_address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:textColor="@color/pearWhite"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:layout_below="@+id/txt_device_title"
+            android:layout_toRightOf="@+id/ble_icon_listview"/>
+
+        <TextView
+            android:id="@+id/txt_rssi_label"
+            android:text="Rssi:"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pearWhite"
+            android:textSize="15sp"
+            android:layout_below="@+id/txt_address_label"
+            android:layout_toRightOf="@+id/ble_icon_listview"/>
+    </RelativeLayout>
+
+</LinearLayout>
